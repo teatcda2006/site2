@@ -38,8 +38,10 @@ def films_by_category_page(request, slug):
 
 def films_by_search_page(request):
     query = request.GET.get("query")
+    genres = Genre.objects.all()
     films = Film.objects.filter(name__icontains=query) | Film.objects.filter(description__icontains=query)
     context = {
+        'genres': genres, 
         "query": query,
         "films": films
     }
